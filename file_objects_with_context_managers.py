@@ -28,4 +28,6 @@ with open('./Miscellaneous/test.txt', 'r') as f: # Opening files without context
 with open('./Miscellaneous/sample.txt', 'w') as f: # 'w' for overwriting and 'a' for appending
     f.write('Write')
 
+    # f.seek(0) # Go to the beginning of the file and replace content
+
 
