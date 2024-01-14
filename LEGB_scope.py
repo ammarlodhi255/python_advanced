@@ -16,6 +16,7 @@ def outer():
     x = 'outer x'
 
     def inner():
+        # nonlocal x
         # x = 'inner x'
         print(x)
 
