@@ -1,0 +1,25 @@
+Add a method to load and validate a given directory:
+Add the following code snippet to your script to define a function for loading and validating a model from a given checkpoint:
+
+python
+Copy code
+def load_and_validate(config, checkpoint_path, data_loader_val, model, logger):
+    checkpoint = torch.load(checkpoint_path, map_location='cuda' if torch.cuda.is_available() else 'cpu')
+    model.load_state_dict(checkpoint['state_dict'])
+    logger.info(f"Model loaded from {checkpoint_path}")
+
+    acc1, acc5, loss = validate(config, data_loader_val, model, logger)
+    logger.info(f"Accuracy of the network on the {len(dataset_val)} test images: {acc1:.1f}%")
+    return acc1, acc5, loss
+Now, you can use this function after training to load the model from a specific checkpoint and validate a given directory:
+
+python
+Copy code
+# Example usage
+checkpoint_path = 'path/to/your/model_epoch_5.pth'  # Replace with the actual path
+load_and_validate(config, checkpoint_path, data_loader_val, model, logger)
+Make sure to adjust the paths and filenames according to your actual setup.
+
+
+
+CUDA_VISIBLE_DEVICES=0,1,2,3 python3 -m torch.distributed.launch --nproc_per_node=4 train.py --dataset CUB_200_2011 --split overlap --num_steps 10000 --fp16 --name sample_run
