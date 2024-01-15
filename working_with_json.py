@@ -26,5 +26,3 @@ states = data['states']
 for i, state in enumerate(states):
     print('State {}: {}, ({})'.format((i+1), state['name'], state['abbreviation']))
 
-
-### Working with json file from the web ###
